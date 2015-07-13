@@ -1,0 +1,1 @@
+This is a DLL collection for access diferent types of data layer
