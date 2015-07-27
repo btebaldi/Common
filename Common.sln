@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Express 2013 for Web
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCommon", ".\FileCommon.csproj", "{0BF91B97-7CBD-405E-B3CC-C2DF63890C0D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileCommon", ".\FileCommon\FileCommon.csproj", "{0BF91B97-7CBD-405E-B3CC-C2DF63890C0D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigCommon", ".\ConfigCommon\ConfigCommon.csproj", "{02642C7D-E49C-4F71-A88B-65BA5026885E}"
 EndProject
