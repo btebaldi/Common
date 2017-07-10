@@ -31,10 +31,9 @@ namespace ConfigCommon
                 if ((result == "Not Found") && OnErrorRaiseException)
                 { throw new Exception("Key (" + key + ") not found in app settings"); }
             }
-            catch (ConfigurationErrorsException)
+            catch (ConfigurationErrorsException ex)
             {
                 throw new ConfigurationErrorsException("Error reading app settings");
-                Console.WriteLine("Error reading app settings");
             }
 
 
@@ -89,6 +88,24 @@ namespace ConfigCommon
             {
                 Console.WriteLine("Error writing app settings");
             }
+        }
+
+
+        public static System.Collections.Specialized.NameValueCollection GetSection_NVC(string sectionName)
+        {
+            return GetSection_NVC(sectionName, false);
+        }
+
+        public static System.Collections.Specialized.NameValueCollection GetSection_NVC(string sectionName, bool OnErrorRaiseException)
+        {
+            System.Collections.Specialized.NameValueCollection result;
+
+            result = (System.Collections.Specialized.NameValueCollection)ConfigurationManager.GetSection(sectionName);
+
+            if ((result == null) && OnErrorRaiseException)
+            { throw new Exception("Section (" + sectionName + ") not found in settings"); }
+
+            return result;
         }
     }
 }

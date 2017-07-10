@@ -160,10 +160,10 @@ namespace DataCommon
         /// <param name="cmd">Command object</param>
         /// <param name="DisposeOfCommand">A boolean value to dispose or not of the command and connection object</param>
         /// <returns>return the number of rows affected</returns>
-        public static int ExecuteSQL(IDbCommand cmd, bool DisposeOfCommand)
+        public static int ExecuteSQL(IDbCommand cmd)
         {
             int intRows = 0;
-            bool boolOpen = false;
+            //bool boolOpen = false;
 
             try
             {
@@ -171,11 +171,12 @@ namespace DataCommon
                 if (cmd.Connection.State != ConnectionState.Open)
                 {
                     cmd.Connection.Open();
+                    //boolOpen = true;
                 }
-                else
-                {
-                    boolOpen = !DisposeOfCommand; //WTF???
-                }
+                //else
+                //{
+                //    boolOpen = true; //WTF???
+                //}
 
                 // Execute SQL 
                 intRows = cmd.ExecuteNonQuery();
@@ -186,18 +187,18 @@ namespace DataCommon
             }
             finally
             {
-                if (!boolOpen)
-                {
-                    // Close the connection
-                    if (cmd.Connection.State == ConnectionState.Open)
-                    {
-                        cmd.Connection.Close();
-                    }
-                    // Dispose of the Objects
-                    cmd.Connection.Dispose();
-                }
-                if (DisposeOfCommand)
-                { cmd.Dispose(); }
+                //if (boolOpen)
+                //{
+                // Close the connection
+                if (cmd.Connection.State == ConnectionState.Open)
+                { cmd.Connection.Close(); }
+
+                // Dispose of the Objects
+                cmd.Connection.Dispose();
+                //}
+                //if (DisposeOfCommand)
+                //{ cmd.Dispose(); }
+                cmd.Dispose();
             }
 
             return intRows;
@@ -208,10 +209,12 @@ namespace DataCommon
         /// </summary>
         /// <param name="cmd">Command object</param>
         /// <returns>return the number of rows affected</returns>
-        public static int ExecuteSQL(IDbCommand cmd)
-        {
-            return ExecuteSQL(cmd, true);
-        }
+        //public static int ExecuteSQL(IDbCommand cmd)
+        //{
+        //    //return ExecuteSQL(cmd, true);
+        //    return ExecuteSQL(cmd);
+
+        //}
 
         /// <summary>
         /// This overloaded method calls the first ExecuteSQL() method after creating a Command and Connection object 
@@ -229,7 +232,8 @@ namespace DataCommon
             cmd = CreateCommand(SQL, ConnectString);
 
             //Execute SQL
-            intRows = ExecuteSQL(cmd, true);
+            //intRows = ExecuteSQL(cmd, true);
+            intRows = ExecuteSQL(cmd);
 
             return intRows;
         }
